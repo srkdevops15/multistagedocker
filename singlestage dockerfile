@@ -8,7 +8,7 @@ WORKDIR /tmp
 RUN git clone https://github.com/srkdevops15/java_demo.git
 
 # Build the application
-WORKDIR /tmp/hello_world_public_war
+WORKDIR /tmp/java_demo
 RUN mvn clean install -e -X
 
 # Copy the WAR file to Tomcat's webapps directory
