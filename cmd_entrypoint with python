@@ -1,0 +1,48 @@
+app.py
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello from Flask in Docker!"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
+
+app1.py
+
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello from app1.py"
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+
+# Dockerfile
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Copy app.py into container
+COPY . /app
+
+# Install Flask
+RUN pip install flask
+
+# Expose Flask port
+EXPOSE 5000
+
+# Start app
+CMD ["python", "app.py"]
+#ENTRYPOINT ["python", "app.py"]
+
+
+docker run -d -p 5001:5000 d50554c15e90 python app1.py
